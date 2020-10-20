@@ -9,7 +9,7 @@ Created on Tuesday 20 October, 2020
 
 import numpy as np
 
-class Optimizer():
+class Optimizer:
     def __init__(self, optimizer, n_e, n_n):
         self.opt = optimizer
         self.m_t = np.zeros((n_e, n_n))
@@ -31,7 +31,7 @@ class Optimizer():
         else:
             raise Exception("Uknown optimization method")
 
-class Layer():
+class Layer:
     def __init__(self, number_of_entries, number_of_neurons, activation_function, optim):
         self.weights = np.random.randn(number_of_entries, number_of_neurons) * np.sqrt(1/number_of_neurons)
         self.biais = np.zeros((1, number_of_neurons))
@@ -94,7 +94,7 @@ class Layer():
         self.weights -= eta * weights
         self.biais -= eta * biais
 
-class Network():
+class Network:
     def __init__(self, optimizer = "SDG"):
         self.optim = optimizer
         self.layers = []
