@@ -2,7 +2,7 @@
 
 Created on Tuesday 20 October, 2020
 
-@author: N.XH.
+@author: N.X.
 
 """
 
