@@ -30,7 +30,7 @@ class Optimizer:
         elif self.opt == "SDG":
             return grad
         else:
-            raise Exception("Uknown optimization method")
+            raise Exception("Unknown optimization method")
 
 class Layer:
     def __init__(self, number_of_entries, number_of_neurons, activation_function, optim):
