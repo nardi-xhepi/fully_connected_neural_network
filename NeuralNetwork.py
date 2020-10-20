@@ -94,7 +94,7 @@ class Layer():
         self.weights -= eta * weights
         self.biais -= eta * biais
 
-class network():
+class Network():
     def __init__(self, optimizer = "SDG"):
         self.optim = optimizer
         self.layers = []
