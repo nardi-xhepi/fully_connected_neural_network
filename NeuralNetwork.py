@@ -12,12 +12,13 @@ import numpy as np
 class Optimizer:
     def __init__(self, optimizer, n_e, n_n):
         self.opt = optimizer
-        self.m_t = np.zeros((n_e, n_n))
-        self.v_t = np.zeros((n_e, n_n))
-        self.t = 0
-        self.B1 = 0.9
-        self.B2 = 0.999
-        self.epsilon = 1e-8
+        if optimizer == "Adam":
+            self.m_t = np.zeros((n_e, n_n))
+            self.v_t = np.zeros((n_e, n_n))
+            self.t = 0
+            self.B1 = 0.9
+            self.B2 = 0.999
+            self.epsilon = 1e-8
     def optimize(self, grad):
         if self.opt == "Adam":
             self.t += 1
