@@ -97,6 +97,9 @@ class MCTS:
         return v
 
     def search_and_backup(self, st):
+
+        """ Etape de recherche. On descend l'arbre de MCTS à l'aide du réseau de neurones. """
+
         state = st
         if self.root.est_feuille():
             v = self._expand_noeud(self.root)
@@ -104,6 +107,8 @@ class MCTS:
         noeud = self.root
         max_u = -float("inf")
         best_action = -1
+
+        """ On arrête la recherche dès qu'on trouve une feuille """
 
         while not noeud.est_feuille():
             for (action, characteristics) in noeud.edges.items():
@@ -123,7 +128,14 @@ class MCTS:
                 noeud = Noeud(state, noeud, best_action)
                 self.arbre[(older_state, best_action)] = noeud
 
+        """ On vérifie d'abord si le jeu est fini """
+
         game_finished = _is_game_finished()
+
+        """
+        Si le jeu n'est pas fini, on développe le noeud feuille et on remonte l'arbre, sinon on obtient la valeur à la fin du jeu et on remonte l'arbre
+
+        """
         if noeud.est_feuille() and not game_finished:
             v = self._expand_noeud(noeud)
 
