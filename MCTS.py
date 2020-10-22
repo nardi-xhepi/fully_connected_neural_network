@@ -70,14 +70,14 @@ class MCTS:
         self.jeu = jeu
         self.temperature = temperature
 
-    def get_action_probability(self, state):
+    def get_action_probability(self):
         """
-        Renvoyer le vecteur contenant les probabilités pour chaque action selon l'état
+        Renvoyer le vecteur contenant les probabilités pour chaque action pour l'état "root"
 
         """
 
         vecteur_probabilite = [0 for _ in range(len(possible_actions))]
-        noeud = self.arbre[state]
+        noeud = self.root
         for (action, c_a) in noeud.edges.items():
             index = list(possible_actions.keys())[list(possible_actions.values()).index(action)]
             vecteur_probabilite[index - 1] = c_a["N_s_a"] / noeud.Ns
