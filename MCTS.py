@@ -80,7 +80,7 @@ class MCTS:
         noeud = self.arbre[state]
         for (action, c_a) in noeud.edges.items():
             index = list(possible_actions.keys())[list(possible_actions.values()).index(action)]
-            vecteur_probabilite[index - 1] = c_a["N_s_a"] / noeud.Ns
+            vecteur_probabilite[index - 1] = c_a["N_s_a"] ** (1/self.temperature) / noeud.Ns
         return vecteur_probabilite
 
     def _expand_noeud(self, noeud):
