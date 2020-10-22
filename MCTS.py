@@ -89,11 +89,11 @@ class MCTS:
         Ps, v = prediction[PROBABILITIES], prediction[VALUE]
         for i in range(len(actions)):
             if actions[i]:
-                noeud.edges[possible_actions[i]] = {    "N_s_a": 0,
-                                                        "W_s_a": 0,
-                                                        "Q_s_a": 0,
-                                                        "P_s_a": Ps[0][i]
-                                                }
+                noeud.edges[possible_actions[i + 1]] = {    "N_s_a": 0,
+                                                            "W_s_a": 0,
+                                                            "Q_s_a": 0,
+                                                            "P_s_a": Ps[0][i]
+                                                    }
         return v
 
     def search_and_backup(self, st):
@@ -115,12 +115,13 @@ class MCTS:
                     max_u = Q + U
                     best_action = action
 
+            older_state = state
             state = self.jeu(best_action)
-            if (state, best_action) in self.arbre:
-                noeud = self.arbre[state]
+            if (older_state, best_action) in self.arbre:
+                noeud = self.arbre[(older_state, best_action)]
             else:
                 noeud = Noeud(state, noeud, best_action)
-                self.arbre[(state, best_action)] = noeud
+                self.arbre[(older_state, best_action)] = noeud
 
         game_finished = _is_game_finished()
         if noeud.est_feuille() and not game_finished:
