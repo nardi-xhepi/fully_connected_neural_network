@@ -80,7 +80,7 @@ class MCTS:
         noeud = self.arbre[state]
         for (action, c_a) in noeud.edges.items():
             index = list(possible_actions.keys())[list(possible_actions.values()).index(action)]
-            vecteur_probabilite[index - 1] = c_a["N_s_a"] ** (1/self.temperature) / noeud.Ns
+            vecteur_probabilite[index - 1] = c_a["N_s_a"] / noeud.Ns
         return vecteur_probabilite
 
     def _expand_noeud(self, noeud):
@@ -146,10 +146,11 @@ class MCTS:
             previous_action = noeud.action
             noeud = noeud.parent
             c_a = noeud.edges[previous_action]
+            noeud.Ns -= c_a["N_s_a"] ** (1/self.temperature)
             c_a["N_s_a"] += 1
             c_a["W_s_a"] += v
             c_a["Q_s_a"] +=  c_a["W_s_a"]/c_a["N_s_a"]
-            noeud.Ns += c_a["N_s_a"] ** self.temperature
+            noeud.Ns += c_a["N_s_a"] ** (1/self.temperature)
 
 
 class NeuralNetworks:
